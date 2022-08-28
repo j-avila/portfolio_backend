@@ -2,24 +2,25 @@ import mongoose from "mongoose"
 
 const Schema = mongoose.Schema
 
-const userRoles = {
-  values: ["ADMIN_ROLE", "USER_ROLE"],
-  message: "{VALUE} no es un rol válido",
-}
-
-const userModel = new Schema({
+const UserSchema = new Schema({
   name: {
     type: String,
-    required: [true, "the name is required"],
+    required: [true, "El nombre es obligatorio"],
+  },
+  email: {
+    type: String,
+    required: [true, "El correo es obligatorio"],
+    unique: true,
   },
   password: {
     type: String,
-    required: [true, "password is required"],
+    required: [true, "La contraseña es obligatoria"],
   },
   role: {
     type: String,
-    enum: userRoles,
+    required: true,
     default: "USER_ROLE",
+    emun: ["ADMIN_ROLE", "USER_ROLE"],
   },
   state: {
     type: Boolean,
@@ -27,6 +28,12 @@ const userModel = new Schema({
   },
 })
 
-const userSchema = mongoose.model("User", userModel)
+UserSchema.methods.toJSON = function () {
+  const { __v, password, _id, ...usuario } = this.toObject()
+  usuario.uid = _id
+  return usuario
+}
 
-export default userSchema
+const usermodel = mongoose.model("User", UserSchema)
+
+export default usermodel

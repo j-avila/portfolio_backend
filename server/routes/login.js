@@ -1,38 +1,20 @@
-import express from "express"
-const app = express()
-import { compareSync } from "bcrypt"
-import sign from "jsonwebtoken"
-import userModel from "../models/user.js"
+import { Router } from "express"
+import { check } from "express-validator"
 
-app.post("/login", function (req, res) {
-  const body = req.body
+import validateFields from "../middlewares/validateFields.js"
 
-  userModel.findOne({ email: body.email }, (err, userDB) => {
-    console.log(body.email)
-    if (err) {
-      return res.status(500).json({ ok: false, err })
-    }
-    if (!userDB) {
-      return res.status(400).json({ ok: false, message: "usuario incorrecto" })
-    }
-    if (!compareSync(body.password, userDB.password)) {
-      return res.status(400).json({ ok: false, message: "password incorrecto" })
-    }
+import login from "../controllers/auth.js"
 
-    const token = sign(
-      {
-        user: userDB,
-      },
-      process.env.USER_SECRET,
-      { expiresIn: process.env.TOKEN_EXPIRES }
-    )
+const router = Router()
 
-    res.json({
-      ok: true,
-      user: userDB,
-      token,
-    })
-  })
-})
+router.post(
+  "/login",
+  [
+    check("email", "El correo es obligatorio").isEmail(),
+    check("password", "La contraseña es obligatoria").not().isEmpty(),
+    validateFields,
+  ],
+  login
+)
 
-export default app
+export default router
