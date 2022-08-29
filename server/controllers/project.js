@@ -34,6 +34,14 @@ export const projectPost = async (req = request, res = response) => {
   })
 }
 
+export const projectPatch = async (req, res = response) => {
+  const { ...payload } = req.body
+  console.log(id)
+  const project = await Project.findByIdAndUpdate(id, { ...payload })
+
+  res.json(project)
+}
+
 export const projectDelete = async (req, res = response) => {
   const { id } = req.query
   console.log(id)
