@@ -1,14 +1,15 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose"
 
 const Schema = mongoose.Schema
 
 const projectSchema = new Schema({
-  name: String,
-  description: String,
-  link: String,
-  repo: String,
-  languages: String,
-  thumbnail: String,
+  name: { type: String, required: [true, "El nombre es obligatorio"] },
+  description: { type: String },
+  link: { type: String, required: [true, "El enlace es requerido"] },
+  repo: { type: String },
+  tags: { type: [String] },
+  thumbnail: { type: String },
+  active: { type: Boolean, default: true },
 })
 
-export default mongoose.model('Project', projectSchema)
+export default mongoose.model("Project", projectSchema)

@@ -5,6 +5,7 @@ import userSchema from "../models/user.js"
 
 const validateJWT = async (req = request, res = response, next) => {
   const token = req.header("x-token")
+  console.log(req)
 
   if (!token) {
     return res.status(401).json({
@@ -13,7 +14,7 @@ const validateJWT = async (req = request, res = response, next) => {
   }
 
   try {
-    const { uid } = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
+    const { uid } = jwt.verify(token, process.env.SECRETKEY)
 
     // leer el usuario que corresponde al uid
     const usuario = await userSchema.findById(uid)
@@ -25,7 +26,7 @@ const validateJWT = async (req = request, res = response, next) => {
     }
 
     // Verificar si el uid tiene estado true
-    if (!usuario.estado) {
+    if (!usuario.state) {
       return res.status(401).json({
         msg: "Token no válido - usuario con estado: false",
       })

@@ -8,7 +8,7 @@ import login from "../controllers/auth.js"
 const router = Router()
 
 router.post(
-  "/login",
+  "/api/login",
   [
     check("email", "El correo es obligatorio").isEmail(),
     check("password", "La contraseña es obligatoria").not().isEmpty(),

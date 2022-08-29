@@ -7,8 +7,8 @@ export const usersGet = async (req = request, res = response) => {
   const query = { estado: true }
 
   const [total, usuarios] = await Promise.all([
-    countDocuments(query),
-    find(query).skip(Number(desde)).limit(Number(limite)),
+    User.countDocuments(query),
+    User.find(query).skip(Number(desde)).limit(Number(limite)),
   ])
 
   res.json({
@@ -20,8 +20,6 @@ export const usersGet = async (req = request, res = response) => {
 export const usersPost = async (req, res = response) => {
   const { name, email, password, role } = req.body
   const usuario = new User({ name, email, password, role })
-
-  console.log(req.body)
 
   // Encriptar la contraseña
   const salt = genSaltSync()
@@ -58,7 +56,7 @@ export const usersPatch = (req, res = response) => {
 
 export const usersDelete = async (req, res = response) => {
   const { id } = req.params
-  const usuario = await findByIdAndUpdate(id, { estado: false })
+  const usuario = await User.findByIdAndUpdate(id, { estado: false })
 
   res.json(usuario)
 }

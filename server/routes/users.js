@@ -20,23 +20,23 @@ import validateFields from "../middlewares/validateFields.js"
 import { checkRole } from "../middlewares/validar-roles.js"
 
 const router = Router()
-const userRoute = "/api/user"
+const userRoute = "/api/users"
 
-router.get(`${userRoute}`, usersGet)
+router.get(userRoute, usersGet)
 
 router.put(
   `${userRoute}:id`,
   [
     check("id", "No es un ID válido").isMongoId(),
     check("id").custom(existeUsuarioPorId),
-    check("rol").custom(esRoleValido),
+    check("role").custom(esRoleValido),
     validateFields,
   ],
   usersPut
 )
 
 router.post(
-  `${userRoute}`,
+  userRoute,
   [
     check("name", "El nombre es obligatorio").not().isEmpty(),
     check("password", "El password debe de ser más de 6 letras").isLength({
@@ -44,7 +44,6 @@ router.post(
     }),
     check("email", "El correo no es válido").isEmail(),
     check("email").custom(emailExiste),
-    // check('rol', 'No es un rol válido').isIn(['ADMIN_ROLE','USER_ROLE']),
     check("role").custom(esRoleValido),
     validateFields,
   ],

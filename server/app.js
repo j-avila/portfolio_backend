@@ -6,7 +6,7 @@ import "dotenv/config"
 
 // routes
 import Login from "./routes/login.js"
-import Products from "./routes/products.js"
+import Projects from "./routes/projects.js"
 import Users from "./routes/users.js"
 
 const app = express()
@@ -14,7 +14,7 @@ const app = express()
 // intializers
 app.use(bodyParser.json())
 app.use(Login)
-app.use(Products)
+app.use(Projects)
 app.use(Users)
 
 // db connection

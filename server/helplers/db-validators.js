@@ -1,18 +1,22 @@
 import Role from "../models/role.js"
 import Usuario from "../models/user.js"
 
-export const esRoleValido = async (role = "") => {
+export const esRoleValido = async (role = "USER_ROLE") => {
+  console.log("check role: ", role)
+
   const existeRol = await Role.findOne({ role })
+  // console.log("check role: ", existeRol)
   if (!existeRol) {
     throw new Error(`El role ${role} no está registrado en la BD`)
   }
 }
 
-export const emailExiste = async (correo = "") => {
+export const emailExiste = async (email = "") => {
   // Verificar si el correo existe
-  const existeEmail = await Usuario.findOne({ correo })
+  console.log("check email:", email)
+  const existeEmail = await Usuario.findOne({ email })
   if (existeEmail) {
-    throw new Error(`El correo: ${correo}, ya está registrado`)
+    throw new Error(`El correo: ${email}, ya está registrado`)
   }
 }
 

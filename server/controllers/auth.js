@@ -10,7 +10,6 @@ const login = async (req, res = response) => {
   try {
     // Verificar si el email existe
     const usuario = await User.findOne({ email })
-    console.log(usuario)
     if (!usuario) {
       return res.status(400).json({
         msg: "Usuario / Password no son correctos - correo",

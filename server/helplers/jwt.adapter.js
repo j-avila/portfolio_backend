@@ -1,12 +1,14 @@
-import jwt from "jsonwebtoken"
+import jsonWebtoken from "jsonwebtoken"
 
-const JWTGenerator = (uid = "") => {
+const sign = jsonWebtoken.sign
+
+const generarJWT = (uid = "") => {
   return new Promise((resolve, reject) => {
     const payload = { uid }
 
-    jwt.sign(
+    sign(
       payload,
-      process.env.SECRETORPRIVATEKEY,
+      process.env.SECRETKEY,
       {
         expiresIn: "4h",
       },
@@ -22,4 +24,4 @@ const JWTGenerator = (uid = "") => {
   })
 }
 
-export default JWTGenerator
+export default generarJWT
