@@ -1,5 +1,6 @@
 import { Router } from "express"
 import { check } from "express-validator"
+import upload from "multer"
 import {
   projectDelete,
   projectPatch,
@@ -10,11 +11,13 @@ import validateJWT from "../middlewares/validateJWT.js"
 
 const router = Router()
 const projectsRoute = "/api/projects"
+const uploader = new upload({ dest: "./public/data/uploads/" })
 
 router.get(projectsRoute, projectsGet)
 
 router.post(
   projectsRoute,
+  uploader.single("image"),
   [
     validateJWT,
     check("name", "El nombre es obligatorio").not().isEmpty(),

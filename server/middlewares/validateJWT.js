@@ -4,11 +4,12 @@ import jwt from "jsonwebtoken"
 import userSchema from "../models/user.js"
 
 const validateJWT = async (req = request, res = response, next) => {
-  const token = req.header("x-token")
-  console.log(req)
+  const token = req.header("Authorization")
 
   if (!token) {
     return res.status(401).json({
+      ok: false,
+      status: 401,
       msg: "No hay token en la petición",
     })
   }

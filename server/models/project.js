@@ -8,7 +8,7 @@ const projectSchema = new Schema({
   link: { type: String, required: [true, "El enlace es requerido"] },
   repo: { type: String },
   tags: { type: [String] },
-  thumbnail: { type: String },
+  image: { type: String },
   active: { type: Boolean, default: true },
 })
 

@@ -1,5 +1,5 @@
-import getConfig from "./config/config.js"
 import express from "express"
+import cors from "cors"
 import dbConnection from "./config/config.js"
 import bodyParser from "body-parser"
 import "dotenv/config"
@@ -11,7 +11,13 @@ import Users from "./routes/users.js"
 
 const app = express()
 
+const corsOptions = {
+  origin: process.env.APP_URL,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 // intializers
+app.use(cors())
 app.use(bodyParser.json())
 app.use(Login)
 app.use(Projects)

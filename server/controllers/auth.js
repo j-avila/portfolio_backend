@@ -6,7 +6,7 @@ import User from "../models/user.js"
 
 const login = async (req, res = response) => {
   const { email, password } = req.body
-
+  console.log(req.body)
   try {
     // Verificar si el email existe
     const usuario = await User.findOne({ email })
