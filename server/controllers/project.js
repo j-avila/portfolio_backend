@@ -23,7 +23,7 @@ export const projectById = (req, res) => {
   const id = req.params.id
   Project.findById(id, (err, project) => {
     if (err) {
-      return req.status.anchor(500).json({
+      return req.status?.anchor(500).json({
         ok: false,
         err,
       })
