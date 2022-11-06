@@ -1,8 +1,9 @@
+import dotenv from "dotenv"
+dotenv.config()
 import express from "express"
 import cors from "cors"
 import dbConnection from "./config/config.js"
 import bodyParser from "body-parser"
-import "dotenv/config"
 
 // routes
 import Login from "./routes/login.js"
