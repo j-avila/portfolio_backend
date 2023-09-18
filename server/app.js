@@ -9,6 +9,9 @@ import bodyParser from "body-parser"
 import Login from "./routes/login.js"
 import Projects from "./routes/projects.js"
 import Users from "./routes/users.js"
+import GetSpotifyAuthCode from "./routes/spotify/getCode.js"
+import GetToken from "./routes/spotify/getTokenByCode.js"
+import GetTrack from "./routes/spotify/getCurrentTrack.js"
 
 const app = express()
 
@@ -23,6 +26,9 @@ app.use(bodyParser.json())
 app.use(Login)
 app.use(Projects)
 app.use(Users)
+app.use(GetSpotifyAuthCode)
+app.use(GetToken)
+app.use(GetTrack)
 
 // db connection
 dbConnection()
