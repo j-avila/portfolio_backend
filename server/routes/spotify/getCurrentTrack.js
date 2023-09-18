@@ -15,6 +15,6 @@ const requestHandler = async (req = request, res = response) => {
   res.json({ track })
 }
 
-router.get("/spotify/current-track", requestHandler)
+router.get("/api/spotify-current-track", requestHandler)
 
 export default router
