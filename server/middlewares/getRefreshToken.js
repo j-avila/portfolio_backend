@@ -1,14 +1,15 @@
+import { Buffer } from "buffer"
 import axios from "axios"
-import queryString from "querystring"
 import { currentTrack } from "../controllers/spotify.js"
-import spotifyToken from "../models/spotify.js"
+// import spotifyToken from "../models/spotify.js"
 
 // Route to refresh the access token using the refresh token
 const refreshToken = async () => {
   const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN
-  const authHeader = btoa(
+  const authHeader = Buffer.from(
     `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
-  )
+  ).toString("base64")
+
   const headers = {
     "Content-Type": "application/x-www-form-urlencoded",
     Authorization: `Basic ${authHeader}`,
