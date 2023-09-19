@@ -58,19 +58,19 @@ export const currentTrack = async (token) => {
   let savedToken = token?.access_token || (await tokensGet())
   let payload
 
-  try {
-    const data = await fetch(apiUrl, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${savedToken}`,
-      },
-    })
-    payload = await data.json()
+  const headers = {
+    Authorization: `Bearer ${savedToken}`,
+  }
 
-    // console.log("da payload", payload)
+  try {
+    const data = await axios.get(apiUrl, { headers })
+    payload = data.data
 
     return payload
   } catch (error) {
-    console.log({ error, payload })
+    console.log("CT", {
+      error: { code: error.response.status, error: error.response.statusText },
+      payload,
+    })
   }
 }

@@ -28,20 +28,21 @@ const refreshToken = async () => {
     )
 
     // Use the new access token or store it securely
-    console.log("TK res", tokenResponse.data)
+    /* console.log("TK res", tokenResponse.data)
 
-    // TODO: store it in DB
-    // try {
-    //   const saved = await spotifyToken.findByIdAndUpdate({
-    //     id: "0",
-    //     body: JSON.stringify({ token: tokenResponse.data.access_token }),
-    //   })
-    //   console.log(saved)
-    //   return currentTrack(tokenResponse.data)
-    // } catch (err) {
-    //   console.log("🤌🏽", err)
-    //   return []
-    // }
+    TODO: store it in DB
+    try {
+      const saved = await spotifyToken.findByIdAndUpdate({
+        id: "0",
+        body: JSON.stringify({ token: tokenResponse.data.access_token }),
+      })
+      console.log(saved)
+      return currentTrack(tokenResponse.data)
+    } catch (err) {
+      console.log("🤌🏽", err)
+      return []
+    } */
+
     return currentTrack(tokenResponse.data)
   } catch (error) {
     console.error("Error refreshing token:", error.message)

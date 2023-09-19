@@ -8,7 +8,7 @@ const requestHandler = async (req = request, res = response) => {
   let track = await currentTrack()
 
   if (track?.error?.status != 200) {
-    console.log("error 🫠", track)
+    // console.log("error 🫠", track)
     const resp = await refreshToken()
     track = resp
   }
