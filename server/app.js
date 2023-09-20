@@ -12,6 +12,7 @@ import Users from "./routes/users.js"
 import GetSpotifyAuthCode from "./routes/spotify/getCode.js"
 import GetToken from "./routes/spotify/getTokenByCode.js"
 import GetTrack from "./routes/spotify/getCurrentTrack.js"
+import GetReadingList from "./routes/pocket.js"
 
 const app = express()
 
@@ -29,6 +30,7 @@ app.use(Users)
 app.use(GetSpotifyAuthCode)
 app.use(GetToken)
 app.use(GetTrack)
+app.use(GetReadingList)
 
 // db connection
 dbConnection()

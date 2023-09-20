@@ -1,7 +1,6 @@
 import axios from "axios"
 import { response, request } from "express"
 import spotifyToken from "../models/spotify.js"
-import project from "../models/project.js"
 
 export const tokenPost = async (req = request, res = response) => {
   const { code, redirectUrl } = req.query
