@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node server/app.js",
-    "start:localhost": "ENV_TYPE=localhost npx nodemon server/app.js",
+    "dev": "ENV_TYPE=localhost npx nodemon server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
